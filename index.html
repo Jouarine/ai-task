@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>任务拆解机</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <button type="button" class="sidebar-toggle" id="sidebarToggleBtn" aria-controls="configSidebar" aria-expanded="false" aria-label="打开设置">
+      <span aria-hidden="true">⚙</span>
+      <span>设置</span>
+    </button>
+
+    <section class="layout">
+      <section class="panel main-panel">
+        <div class="result-header">
+          <h2>任务拆解机</h2>
+        </div>
+
+        <label for="taskInput">
+          <textarea id="taskInput" placeholder="例如：学习英语、整理房间、准备面试、写毕业论文第一章"></textarea>
+        </label>
+
+        <div class="button-row button-row-main top-gap">
+          <button type="button" class="primary-btn" id="breakdownBtn">拆解任务</button>
+          <button type="button" class="icon-btn" id="regenerateBtn" aria-label="重新生成" title="重新生成">
+            <span aria-hidden="true">↻</span>
+          </button>
+        </div>
+
+        <div class="status-box task-status-empty" id="taskStatus" data-tone="info"></div>
+
+        <section class="card-section">
+          <h2 class="section-title">微步骤卡片</h2>
+          <div class="result-meta" id="stepCounter">当前 0 个步骤</div>
+          <div class="cards" id="cardsContainer" aria-live="polite">
+            <div class="empty-state">拆解结果会显示在这里。每完成一步，只需要勾选一下，卡片就会自动消失。</div>
+          </div>
+        </section>
+      </section>
+
+      <aside class="panel sidebar-panel" id="configSidebar" aria-hidden="true">
+        <h2>API 配置</h2>
+
+        <div class="form-grid">
+          <label for="providerSelect">
+            AI 供应商
+            <select id="providerSelect">
+              <option value="openai-compatible">OpenAI 兼容</option>
+              <option value="deepseek" selected>DeepSeek</option>
+              <option value="siliconflow">硅基流动</option>
+            </select>
+          </label>
+
+          <label for="baseUrlInput" id="baseUrlField">
+            Base URL
+            <input id="baseUrlInput" type="url" placeholder="https://api.deepseek.com/v1" />
+          </label>
+          <p class="field-hint" id="baseUrlHint"></p>
+
+          <label for="apiKeyInput">
+            API Key
+            <input id="apiKeyInput" type="password" autocomplete="off" placeholder="输入 API Key" />
+          </label>
+
+          <label for="modelSelect">
+            模型
+            <select id="modelSelect">
+              <option value="">请先点击“拉取模型”</option>
+            </select>
+          </label>
+
+          <div class="button-stack">
+            <button type="button" class="secondary-btn" id="fetchModelsBtn">拉取模型</button>
+            <button type="button" class="secondary-btn" id="testConnectionBtn">测试连通性</button>
+            <button type="button" class="ghost-btn" id="saveConfigBtn">保存配置</button>
+            <button type="button" class="danger-btn" id="clearStorageBtn">清除存储</button>
+          </div>
+        </div>
+
+        <div class="status-box config-status-empty" id="configStatus" data-tone="info"></div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="./js/constants.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
